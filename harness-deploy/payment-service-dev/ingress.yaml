@@ -18,10 +18,14 @@ spec:
   {{- end }}
     http:
      paths:
-     - backend:
+     - path: /
+       pathType: Prefix
+       backend:
+         service:
        {{- if lower .Values.sename}}
-          serviceName: payment-service-{{ lower .Values.sename }}-svc
+           name: payment-service-{{ lower .Values.sename }}-svc
        {{- else }}
-          serviceName: payment-service-svc
+           name: payment-service-svc
        {{- end }}
-          servicePort: 8080
+           port:
+             number: 80
